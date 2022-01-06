@@ -10,7 +10,17 @@
 #  prereq_id     :integer
 #
 class Course < ApplicationRecord
-    belongs_to :enrollments,
+    has_many :enrollments,
         primary_key: :id,
-        foreign_key: :course_id
+        foreign_key: :course_id,
+        class_name: :Enrollment
+
+    has_many :enrolled_students,
+        through: :enrollments,
+        source: :user
+
+    has_one :prereq,
+        primary_key: :id,
+        foreign_key: :prereq_id,
+        class_name: :Course
 end
