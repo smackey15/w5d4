@@ -23,4 +23,8 @@ class Course < ApplicationRecord
         primary_key: :id,
         foreign_key: :prereq_id,
         class_name: :Course
+
+    has_one :instructor,
+        through: :enrollments,
+        source: :user 
 end
